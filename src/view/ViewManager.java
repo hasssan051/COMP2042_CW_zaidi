@@ -1,12 +1,14 @@
 package view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,22 +19,25 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.FroggerButton;
-import model.FroggerSubScene;
-import model.InfoLabel;
-import model.LEVEL;
-import model.LevelPicker;
+import model.MenuModels.FroggerButton;
+import model.MenuModels.FroggerSubScene;
+import model.MenuModels.InfoLabel;
+import model.MenuModels.LEVEL;
+import model.MenuModels.LevelPicker;
 import javafx.scene.effect.DropShadow;
 
 public class ViewManager {
 	
-	private static final int WIDTH = 600;
-	private static final int HEIGHT = 800;
+	private static final int WIDTH = 800;
+	private static final int HEIGHT = 600;
 	private AnchorPane mainPane;
 	private Scene mainScene;
 	private Stage mainStage;
 	
+	public final static String FONT_PATH= "src/model/MenuResources/kenvector_future.ttf";
 	private final static int MENU_BUTTON_START_X=40;
 	private final static int MENU_BUTTON_START_Y=220;
 	
@@ -50,14 +55,13 @@ public class ViewManager {
 	public ViewManager() {
 		menuButtons= new ArrayList<>();
 		mainPane= new AnchorPane();
-		mainScene = new Scene(mainPane,HEIGHT,WIDTH);
+		mainScene = new Scene(mainPane,WIDTH,HEIGHT);
 		mainStage=new Stage();
 		mainStage.setScene(mainScene);
+		mainStage.setResizable(false);
 		createButton();
 		createBackground();
 		createSubScene();
-		
-		
 	}
 	
 	//if there is a subscene that needs to be hidden move it 
@@ -71,16 +75,54 @@ public class ViewManager {
 	}
 	
 	private void createSubScene() {
-		subSceneScore = new FroggerSubScene();
-		mainPane.getChildren().add(subSceneScore);
 		
-		subSceneHelp = new FroggerSubScene();
-		mainPane.getChildren().add(subSceneHelp);
 		
 		createLevelChooserSubScene();
+		createHelpSubScene();
+		createScoreSubScene();
 		
 	}
 	
+	private void createScoreSubScene() {
+		subSceneScore = new FroggerSubScene();
+		mainPane.getChildren().add(subSceneScore);
+		
+		InfoLabel heading =new InfoLabel("SCORE TABLE", true);
+		heading.setLayoutX(160);
+		heading.setLayoutY(27);
+		subSceneScore.getPane().getChildren().add(heading);
+		
+//		HBox box = new HBox();
+//		box.setSpacing(20);
+//		levelList = new ArrayList<LevelPicker>();
+//		//below is how we get instances from an enum using the values method
+//		for(LEVEL level: LEVEL.values()) {
+//			LevelPicker levelToPick= new LevelPicker(level);			
+//			levelList.add(levelToPick);
+//			box.getChildren().add(levelToPick);
+//		}
+//		box.setLayoutX(310 -(118*2));
+//		box.setLayoutY(100);
+//		subSceneScore.getPane().getChildren().add(box);
+	
+	}
+
+	private void createHelpSubScene() {
+		subSceneHelp = new FroggerSubScene();
+		mainPane.getChildren().add(subSceneHelp);
+		
+		InfoLabel heading =new InfoLabel("HELP", true);
+		heading.setLayoutX(225);
+		heading.setLayoutY(27);
+		subSceneHelp.getPane().getChildren().add(heading);
+		
+	
+		/*
+		 * ScrollPane scrollPane = new ScrollPane();
+		 * subSceneHelp.getPane().getChildren().add(scrollPane);
+		 */
+	}
+
 	//method used to create levelchoosersubscene 
 	private void createLevelChooserSubScene() {
 		subSceneLevelChooser= new FroggerSubScene();
@@ -132,6 +174,20 @@ public class ViewManager {
 		FroggerButton startButton =new FroggerButton("START");
 		startButton.setLayoutX(270);
 		startButton.setLayoutY(285);
+		
+		startButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				if(choosenLevel != null) {
+					
+					GameViewManager gameManager= new GameViewManager();
+					gameManager.createNewGame(mainStage, choosenLevel);
+				}
+			}
+		});
+		
 		return startButton;
 	}
 	
@@ -215,14 +271,14 @@ public class ViewManager {
 
 
 	private void createBackground() {
-		Image backgroundImage= new Image("view/resources/background.jpg",800,600,true,false);
+		Image backgroundImage= new Image("view/ViewResources/background.jpg",800,600,true,false);
 		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,BackgroundPosition.DEFAULT,null);
 		mainPane.setBackground(new Background(background));
 		
 	}
 	
 	private void createLogo() {
-		ImageView logo= new ImageView("view/resources/frogger-logo-2.png");
+		ImageView logo= new ImageView("view/ViewResources/frogger-logo-2.png");
 		logo.setFitHeight(350);
 		logo.setFitWidth(450);
 		logo.setPreserveRatio(true);
@@ -251,7 +307,7 @@ public class ViewManager {
 	}
 	
 	private void createIcon() {
-		ImageView icon = new ImageView("view/resources/frog.png");
+		ImageView icon = new ImageView("view/ViewResources/frog.png");
 		
 		icon.setFitHeight(200);
 		icon.setFitWidth(200);
