@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public abstract class Actor extends ImageView{
 	
 	protected int speed=1;
-	private int speedMultiplier;
+	protected int spacing=0;
 	
 	/**
 	 * Method used to move Actor/ImageView object on the x and y axis according to arguments.
@@ -66,23 +66,16 @@ public abstract class Actor extends ImageView{
         return someArray;
     }
     
-    public abstract void act(long now);
+    public abstract void act(long now, ArrayList<Actor> objects, int speedMultiplier);
         
-    /**
-     * used to set the Speed of the Actor(how fast it will move in the parent)
-     * @param speed 
-     */
-    public void setSpeed() {
-		/*
-		 * speedMultiplier+=6; this.speed=speedMultiplier*this.speed ;
-		 */
-    	speed++;
-    	this.speed= speed*this.speed;
-    	//System.out.println(this.speed);
+
+    public void setSpacing(int spacing) {
+    	this.spacing= spacing;
+    }
+    public int getSpacing() {
+    	return this.spacing;
     }
     
-    public int getSpeed() {
-    	return speed;
-    }
+  
 
 }

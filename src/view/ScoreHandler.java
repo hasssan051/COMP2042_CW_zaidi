@@ -100,25 +100,5 @@ public class ScoreHandler {
 	
 	public int getHighScoreForLevel(int numOfLevel) {
 		return Integer.parseInt((highScoresList.get(numOfLevel).split(":")[1])) ;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

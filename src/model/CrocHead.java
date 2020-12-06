@@ -12,7 +12,7 @@ public class CrocHead extends Actor{
 	
 	private double speed;
 	@Override
-	public void act(long now) {
+	public void act(long now,ArrayList<Actor> objects,int speedMultiplier) {
 		this.setVisible(false);
 		move(0,speed);
 		this.setVisible(true);

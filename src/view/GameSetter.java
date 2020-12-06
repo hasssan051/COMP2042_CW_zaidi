@@ -3,15 +3,16 @@ package view;
 
 import java.util.ArrayList;
 
+
 import model.Actor;
 import model.Animal;
 import model.CrocHead;
-import model.Crocodile;
 import model.End;
 import model.Log;
 import model.Obstacle;
 import model.Turtle;
 import model.WetTurtle;
+import model.ActorResources.ActorComponents;
 
 /**
  * This class is used to make each of the object that the GameViewManager Class will later render
@@ -24,25 +25,19 @@ public class GameSetter {
 
 	private Actor frogger;
 	
-	private static final String LOG_URL_1 = "file:src/model/ActorResources/log3.png";
-	private static final String LOG_URL_2 = "file:src/model/ActorResources/logs.png";
-	private static final String SMALL_TRUCK_URL = "file:src/model/ActorResources/truck1Right.png";
-	private static final String LARGE_TRUCK_URL = "file:src/model/ActorResources/truck2Right.png";
-    private static final String CAR_URL = "file:src/model/ActorResources/car1Left.png";
 	private static final String FROGGER_URL = "file:src/model/ActorResources/froggerUp.png";
-    private static final String CROCODILE_RIGHT = "file:src/model/ActorResources/crocodile.png";
-    private static final String CROCODILE_LEFT = "file:src/model/ActorResources/crocodileleft.png";
     private static final String CROC_HEAD_= "file:src/model/ActorResources/crochead.png";
 	
-	public GameSetter(int numOfLogs, int numOfCars, int numOfTrucks, int numOfTurtles, int numOfCrocodiles, boolean CrocHead) {
+	public GameSetter(int numOfLogs, int numOfSlowCars,int numOfFastCars,int numOfLargeTrucks,
+			int numOfSmallTrucks,int numOfTurtles,int numOfWetTurtles,int numOfCrocodiles,boolean CrocHead) {
 		//objects.clear();
 		createLog(numOfLogs, (int)Math.ceil(numOfLogs/2), numOfLogs);
-		createSlowCars(numOfCars);
-		createFastCars(numOfCars/2);
-		createLargeTrucks(numOfTrucks);
-		createSmallTrucks(numOfTrucks/2);
+		createSlowCars(numOfSlowCars);
+		createFastCars(numOfFastCars);
+		createLargeTrucks(numOfLargeTrucks);
+		createSmallTrucks(numOfSmallTrucks);
 		createTurtle(numOfTurtles);
-		createWetTurle(numOfTurtles*2-1 );
+		createWetTurle(numOfWetTurtles);
 		createCrocodilesRight(numOfCrocodiles);
 		createCrocodilesLeft(numOfCrocodiles);
 		createEnd();
@@ -68,7 +63,7 @@ public class GameSetter {
 	private void createCrocodilesRight(int numOfCrocodiles) {
 		int xpos=0;
 		for(int i=0; i<numOfCrocodiles;i++) {
-			Obstacle croc = new Obstacle(CROCODILE_RIGHT, xpos, 200,2,120,120);
+			Obstacle croc = new Obstacle(ActorComponents.CROCODILE, xpos, 200,2);
 			objects.add(croc);
 			xpos+=400;
 		}
@@ -81,7 +76,7 @@ public class GameSetter {
 	private void createCrocodilesLeft(int numOfCrocodiles) {
 		int xpos=0;
 		for(int i=0; i<numOfCrocodiles;i++) {
-			Obstacle croc = new Obstacle(CROCODILE_LEFT, xpos, 276, -2,120,120);
+			Obstacle croc = new Obstacle(ActorComponents.CROCODILE, xpos, 276, -2);
 			objects.add(croc);
 			xpos+=400;
 		}
@@ -114,13 +109,12 @@ public class GameSetter {
 	 */
 
 	private void createTurtle(int turtleNum) {
-		int xpos=300;
+		int xpos=0;
 		for(int i=0;i<turtleNum;i++) {
-			Turtle turtle =new Turtle(xpos, 376, -1, 130, 130);
+			Turtle turtle =new Turtle(xpos, 376, -1);
 			objects.add(turtle);
 			xpos+=200;
-		}
-	createWetTurle(turtleNum*2);	
+		}	
 	}
 	
 	/**
@@ -128,14 +122,12 @@ public class GameSetter {
 	 * @param turtleNum specifies number of WetTurles needed to be created
 	 */
 	private void createWetTurle(int turtleNum) {
-		int xpos=200;
+		int xpos=0;
 		for(int i=0;i<turtleNum;i++) {
-			WetTurtle turtle =new WetTurtle(xpos, 217, -1, 130, 130);
+			WetTurtle turtle =new WetTurtle(xpos, 217, -1);
 			objects.add(turtle);
 			xpos+=200;
 		}
-		objects.add(new WetTurtle(700, 376, -1, 130, 130));
-		
 	}
 	
 	/**
@@ -160,7 +152,7 @@ public class GameSetter {
 	private void createLogForFirstQuad(int firstQuadNum){
 		int xpos=0;
 		for(int i=0; i < firstQuadNum; i++) {
-			Log firstQuadLog = new Log( LOG_URL_1,150, xpos, 166, 0.75);
+			Log firstQuadLog = new Log( ActorComponents.LOG3, xpos, 166, 0.75);
 			objects.add(firstQuadLog);
 			xpos+=276;
 		}
@@ -173,7 +165,7 @@ public class GameSetter {
 	private void createLogForSecondQuad(int secondQuadNum){
 		int xpos=0;
 		for(int i=0; i < secondQuadNum; i++) {
-			Log secondQuadLog = new Log(LOG_URL_2,300, xpos, 276, -2);
+			Log secondQuadLog = new Log(ActorComponents.LOG, xpos, 276, -2);
 			objects.add(secondQuadLog);
 			xpos+=400;	 
 		}
@@ -186,7 +178,7 @@ public class GameSetter {
 	private void createLogForThirdQuad(int thirdQuadNum) {
 		int xpos=50;
 		for(int i=0; i < thirdQuadNum; i++) {
-			Log thirdQuadLog = new Log(LOG_URL_1,150, xpos, 329, 0.75);
+			Log thirdQuadLog = new Log(ActorComponents.LOG3, xpos, 329, 0.75);
 			objects.add(thirdQuadLog);
 			xpos+=220;
 		}
@@ -199,7 +191,7 @@ public class GameSetter {
 	private void createSlowCars(int carNum) {
 		int xpos=100;
 		for (int i=0; i< carNum; i++) {
-			Obstacle slowCars = new Obstacle(CAR_URL, xpos, 597, -1, 50, 50);
+			Obstacle slowCars = new Obstacle(ActorComponents.CAR, xpos, 597, -1);
 			objects.add(slowCars);
 			xpos +=150;
 			}
@@ -213,7 +205,7 @@ public class GameSetter {
 	private void createFastCars(int carNum) {
 		int xpos=500;
 		for (int i=0; i< carNum; i++) {
-			Obstacle fastCars = new Obstacle(CAR_URL, xpos, 490, 5, 50, 50);
+			Obstacle fastCars = new Obstacle(ActorComponents.CAR, xpos, 490, 5);
 			objects.add(fastCars);
 			xpos +=150;
 			}
@@ -226,7 +218,7 @@ public class GameSetter {
 	private void createSmallTrucks(int truckNum) {
 	int xpos=0;
 	for (int i=0; i< truckNum; i++) {
-		Obstacle smallTruck = new Obstacle(SMALL_TRUCK_URL, xpos, 649, 1, 120, 120);
+		Obstacle smallTruck = new Obstacle(ActorComponents.TRUCK1, xpos, 649, 1);
 		objects.add(smallTruck);
 		xpos +=300;
 		}
@@ -238,11 +230,12 @@ public class GameSetter {
 	 */
 	
 	private void createLargeTrucks(int truckNum) {
-		int xpos=0;
-		for (int i=0; i< truckNum; i++) {
-			Obstacle largeTruck = new Obstacle(LARGE_TRUCK_URL, xpos, 540, 1, 200, 200);
+		int xDistance= 10;
+		int xpos=ActorComponents.TRUCK2.getWidth() + xDistance;
+		for (int i=0; i<=5; i++) {
+			Obstacle largeTruck = new Obstacle(ActorComponents.TRUCK2, xpos, 540, 1);
 			objects.add(largeTruck);
-			xpos +=500;
+			xpos = xpos + ActorComponents.TRUCK2.getWidth() + xDistance;
 			}
 	}
 	

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -18,6 +19,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -92,18 +94,55 @@ public class ViewManager {
 		heading.setLayoutY(27);
 		subSceneScore.getPane().getChildren().add(heading);
 		
-//		HBox box = new HBox();
-//		box.setSpacing(20);
-//		levelList = new ArrayList<LevelPicker>();
-//		//below is how we get instances from an enum using the values method
-//		for(LEVEL level: LEVEL.values()) {
-//			LevelPicker levelToPick= new LevelPicker(level);			
-//			levelList.add(levelToPick);
-//			box.getChildren().add(levelToPick);
-//		}
-//		box.setLayoutX(310 -(118*2));
-//		box.setLayoutY(100);
-//		subSceneScore.getPane().getChildren().add(box);
+		VBox column = new VBox();
+		column.setLayoutX(40);
+		column.setLayoutY(100);
+		
+		ArrayList<HBox> hboxList= new ArrayList<HBox>();
+
+		column.setSpacing(50);
+		
+		ArrayList<InfoLabel> levelLabelList = new ArrayList<InfoLabel>();
+		for(LEVEL level: LEVEL.values()) {	
+			InfoLabel levelLabel;
+			if(level.getLevel().equals("LAZY")) {
+				levelLabel = new InfoLabel(level.getLevel()+"\t\t:");
+			} else {
+			levelLabel = new InfoLabel(level.getLevel()+"\t:");}
+			levelLabel.setPrefSize(150, 20);
+			levelLabel.setTextFill(Color.web("#6e0412",0.8));
+			levelLabelList.add(levelLabel);
+			hboxList.add(new HBox());
+		}	
+		for(HBox hbox: hboxList) {
+			hbox.setSpacing(50);
+			hbox.setLayoutX(370 -(118*2));
+			hbox.setLayoutY(100);
+			hbox.setAlignment(Pos.CENTER_LEFT);
+		}
+		
+		
+		ScoreHandler scoreHandler =new ScoreHandler();
+		
+		scoreHandler.readHighScores();
+		ArrayList<String> highScoreList =scoreHandler.getHighScoresList();
+		for(int i=0;i<highScoreList.size();i++) {
+			InfoLabel name= new InfoLabel((highScoreList.get(i)).split(":")[0]);
+			name.setPrefSize(100, 20);
+			InfoLabel score = new InfoLabel((highScoreList.get(i)).split(":")[1]);
+			score.setPrefSize(70, 20);
+			hboxList.get(i).getChildren().add(levelLabelList.get(i));
+			hboxList.get(i).getChildren().add(name);
+			hboxList.get(i).getChildren().add(score);
+			
+		}
+		
+	
+		for(int i=0;i<highScoreList.size();i++) {
+			column.getChildren().add(hboxList.get(i));
+		}
+		
+		subSceneScore.getPane().getChildren().add(column);
 	
 	}
 

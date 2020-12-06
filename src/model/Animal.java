@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import application.*;
 import javafx.event.EventHandler;
@@ -46,7 +47,8 @@ public class Animal extends Actor {
 	//this is to check if the frog is at the end or not
 	ArrayList<End> inter = new ArrayList<>();
 	ArrayList<End> activatedEnds =new ArrayList<End>();
-	//why does everything happen in the constructor with this class
+	HashMap<Integer, String> capitalCities = new HashMap<Integer, String>();
+	
 	public Animal(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true)); //Image constructor used as argument to setImage method
 		//initial position of the frog
@@ -142,7 +144,7 @@ public class Animal extends Actor {
 	}
 
 	@Override
-	public void act(long now) {		
+	public void act(long now, ArrayList<Actor> objects,int speedMultiplier) {		
 		froggerInBound();
 		
 		ifCarDeath(now); 
@@ -155,9 +157,13 @@ public class Animal extends Actor {
 			stop = true;
 		}
 		
-		if(getIntersectingObjects(Crocodile.class).size()>=1) {
-			crocodileDeath=true;
+		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+			carDeath = true;
 		}
+		/*
+		 * if(getIntersectingObjects(Crocodile.class).size()>=1) { crocodileDeath=true;
+		 * }
+		 */
 		else if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
 			if(getIntersectingObjects(Log.class).get(0).getLeft())
 				move(-2,0);
@@ -236,9 +242,7 @@ public class Animal extends Actor {
 
 	private void ifWaterDeath(long now) {
 		
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-			carDeath = true;
-		}
+		
 		
 		if (waterDeath) {
 			

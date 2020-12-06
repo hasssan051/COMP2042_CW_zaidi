@@ -79,7 +79,7 @@ public class GameViewManager {
 		gameScene = new Scene(background, GAME_WIDTH, GAME_HEIGHT);
 		gameStage = new Stage();
 		gameStage.setScene(gameScene);
-		gameStage.setResizable(false);
+		//gameStage.setResizable(false);
 	}
 	
 	/**
@@ -115,15 +115,15 @@ public class GameViewManager {
 		switch (choosenLevel.getLevel()) {
 		case "LAZY":
 			numOfLevel=0;
-			startGame(3,3,3,2,0,false);
+			startGame(3,3,3,3,3,3,3,0,false);
 			break;
 		case "AVERAGE":
 			numOfLevel=1;
-			startGame(3,3,3,2,3,false);
+			startGame(6,6,6,6,6,6,6,6,false);
 			break;
 		case "CRAZY":
 			numOfLevel=2;
-			startGame(3,3,3,2,3,true);
+			startGame(9,9,9,9,9,9,9,9,true);
 			break;
 		default: System.out.println("something seriously is wrong here");
 			break;
@@ -140,9 +140,11 @@ public class GameViewManager {
 	 * @param numOfCrocodiles number of Crocodiles in the game
 	 * @param CrocHead specifies whether there is going to be a CrocHead in the game or not
 	 */
-	private void startGame(int numOfLogs, int numOfCars, int numOfTrucks, int numOfTurtles, int numOfCrocodiles, boolean CrocHead) {
+	private void startGame(int numOfLogs, int numOfSlowCars,int numOfFastCars,int numOfLargeTrucks,
+			int numOfSmallTrucks, int numOfTurtles,int numOfWetTurtles, int numOfCrocodiles, boolean CrocHead) {
 			createNameDialog();
-			GameSetter game = new GameSetter(numOfLogs,numOfCars,numOfTrucks,numOfTurtles,numOfCrocodiles,CrocHead);
+			GameSetter game = new GameSetter(numOfLogs,numOfSlowCars,numOfFastCars,numOfLargeTrucks,
+					numOfSmallTrucks,numOfTurtles,numOfWetTurtles,numOfCrocodiles,CrocHead);
 			frogger=(Animal) game.getFrogger();
 			objects= game.getArrayList();
 			setObjectsToBackground();
@@ -194,12 +196,11 @@ public class GameViewManager {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-            	int speed=1;
+            	int speedMultiplier=1;
             	if(frogger.isGameOver()) {
+            		
             		System.out.print("STOPP:");
-            		//background.stopMusic();
             		stop();
-            		//background.stop();
             		if(scoreHandler.isNewHighScore(frogger.getPoints(), numOfLevel)) {
             			newHighScore=playerName+ ":"+ frogger.getPoints();
             			scoreHandler.replaceLine(newHighScore,numOfLevel);
@@ -214,25 +215,22 @@ public class GameViewManager {
             	}
             	List<Actor> actors = background.getObjects(Actor.class);
                 for (Actor anActor: actors) {
-                	anActor.act(now);
+                	anActor.act(now, objects,speedMultiplier);
                 }
             	if (frogger.changeScore()) {
             		setNumber(frogger.getPoints());
             	}           	
             	if(frogger.hasStageEnded()) {
             		System.out.println("stage has ended bro");
-            		speed++;
+            		speedMultiplier++;
+            		System.out.printf("The speed has increased by %d", speedMultiplier);
             		speedChange=true;
             		if(hasSpeedChanged()) {
             			System.out.println("why is speed change not showing then...");
             			showSpeedChange();
             		}
-            		if(speed<= 3) {
-            			System.out.printf("The speed has increased by %d", speed);
-            			for (Actor anActor: actors) {
-                        	anActor.setSpeed();
-                        	System.out.printf("\nThe speed of the actor is %d\n", anActor.getSpeed());
-                        }
+            		if(speedMultiplier== 3) {
+            			stop();
             		}
             	}
             }

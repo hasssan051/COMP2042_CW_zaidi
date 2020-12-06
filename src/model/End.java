@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 
 public class End extends Actor{
@@ -30,7 +32,7 @@ public class End extends Actor{
 	}
 
 	@Override
-	public void act(long now) {
+	public void act(long now, ArrayList<Actor> objects,int speedMultiplier) {
 		/*
 		 * if(counter==5) { this.activated=false; }
 		 */

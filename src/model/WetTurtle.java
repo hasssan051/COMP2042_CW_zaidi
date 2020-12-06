@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
+import model.ActorResources.ActorComponents;
 
 public class WetTurtle extends Actor{
 	Image turtle1;
@@ -11,15 +14,14 @@ public class WetTurtle extends Actor{
 	private int speed=0;
 	boolean sunk = false;
 	
-	private static final String TURTLEANIMATION1_URL ="file:src/model/ActorResources/TurtleAnimation1.png";
-	private static final String TURTLEANIMATION2WET_URL ="file:src/model/ActorResources/TurtleAnimation2Wet.png";
-	private static final String TURTLEANIMATION3WET_URL ="file:src/model/ActorResources/TurtleAnimation3Wet.png";
-	private static final String TURTLEANIMATION4WET_URL ="file:src/model/ActorResources/TurtleAnimation4Wet.png";
-	
+	ActorComponents oBject =ActorComponents.WETTURTLE;
+	ArrayList<Actor> objects;
+	private int spacing= 100;
 	
 	@Override
-	public void act(long now) {
-
+	public void act(long now,ArrayList<Actor> objects, int speedMultiplier) {
+		this.objects=objects;
+		double firstXPos= getFirstXPosition();
 				if (now/900000000  % 4 ==0) {
 					setImage(turtle2);
 					sunk = false;
@@ -38,15 +40,19 @@ public class WetTurtle extends Actor{
 			
 		move(speed , 0);
 		if (getX() > 600 && speed>0)
-			setX(-200);
+			if(firstXPos<0) {
+				setX(firstXPos-oBject.getWidth()-spacing);
+				} else {
+					setX(-oBject.getWidth()-spacing);
+				}
 		if (getX() < -75 && speed<0)
 			setX(600);
 	}
-	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image(TURTLEANIMATION1_URL, w, h, true, true);
-		turtle2 = new Image(TURTLEANIMATION2WET_URL, w, h, true, true);
-		turtle3 = new Image(TURTLEANIMATION3WET_URL, w, h, true, true);
-		turtle4 = new Image(TURTLEANIMATION4WET_URL, w, h, true, true);
+	public WetTurtle(int xpos, int ypos, int s) {
+		turtle1 = new Image(oBject.getUrlAnimation1(), oBject.getWidth(), oBject.getHeight(), true, true);
+		turtle2 = new Image(oBject.getUrlAnimation2(), oBject.getWidth(), oBject.getHeight(), true, true);
+		turtle3 = new Image(oBject.getUrlAnimation3(),oBject.getWidth(), oBject.getHeight(), true, true);
+		turtle4 = new Image(oBject.getUrlAnimation4(),oBject.getWidth(), oBject.getHeight(), true, true);
 		setX(xpos);
 		setY(ypos);
 		this.speed = s;
@@ -55,4 +61,20 @@ public class WetTurtle extends Actor{
 	public boolean isSunk() {
 		return sunk;
 	}
+	
+	protected double getFirstXPosition() {
+		double firstXPos=0;
+		for(Actor actor: objects) {
+			if(getY()==actor.getY() && (firstXPos>actor.getX())) {
+				firstXPos=actor.getX();
+			}
+		}
+		return firstXPos;
+	}
+	
+	
+	
+	
+	
+	
 }

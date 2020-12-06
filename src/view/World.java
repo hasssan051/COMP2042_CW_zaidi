@@ -73,7 +73,8 @@ public class World extends Pane {
         getChildren().remove(node);
     }
     //the method below will return a list of Actor Objects //the method takes in an actor object as a parameter 
-    public <A extends Actor> List<A> getObjects(Class<A> cls) {
+    @SuppressWarnings("unchecked")
+	public <A extends Actor> List<A> getObjects(Class<A> cls) {
         ArrayList<A> someArray = new ArrayList<A>();
         //checking if the object cls that we have passed into the method is an instance of Node class
         for (Node n: getChildren()) {
