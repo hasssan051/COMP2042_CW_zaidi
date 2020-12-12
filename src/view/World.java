@@ -9,7 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import model.Actor;
+
+import model.IntersectingActors;
 
 
 public class World extends Pane {
@@ -30,8 +31,8 @@ public class World extends Pane {
 						public void handle(KeyEvent event) {
 							if(getOnKeyReleased() != null) 
 								getOnKeyReleased().handle(event);
-							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor: myActors) {
+							List<IntersectingActors> myActors = getObjects(IntersectingActors.class);
+							for (IntersectingActors anActor: myActors) {
 								if (anActor.getOnKeyReleased() != null) {
 									anActor.getOnKeyReleased().handle(event);
 								}
@@ -46,8 +47,8 @@ public class World extends Pane {
 						public void handle(KeyEvent event) {
 							if(getOnKeyPressed() != null) 
 								getOnKeyPressed().handle(event);
-							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor: myActors) {
+							List<IntersectingActors> myActors = getObjects(IntersectingActors.class);
+							for (IntersectingActors anActor: myActors) {
 								if (anActor.getOnKeyPressed() != null) {
 									anActor.getOnKeyPressed().handle(event);
 								}
@@ -74,7 +75,7 @@ public class World extends Pane {
     }
     //the method below will return a list of Actor Objects //the method takes in an actor object as a parameter 
     @SuppressWarnings("unchecked")
-	public <A extends Actor> List<A> getObjects(Class<A> cls) {
+	public <A extends IntersectingActors> List<A> getObjects(Class<A> cls) {
         ArrayList<A> someArray = new ArrayList<A>();
         //checking if the object cls that we have passed into the method is an instance of Node class
         for (Node n: getChildren()) {
@@ -84,6 +85,7 @@ public class World extends Pane {
         }
         return someArray;
     }
+
 
 	
 }

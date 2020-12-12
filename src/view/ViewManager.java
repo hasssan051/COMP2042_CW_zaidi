@@ -1,15 +1,11 @@
 package view;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,11 +14,10 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.MenuModels.FroggerButton;
 import model.MenuModels.FroggerSubScene;
@@ -155,11 +150,22 @@ public class ViewManager {
 		heading.setLayoutY(27);
 		subSceneHelp.getPane().getChildren().add(heading);
 		
-	
-		/*
-		 * ScrollPane scrollPane = new ScrollPane();
-		 * subSceneHelp.getPane().getChildren().add(scrollPane);
-		 */
+		GridPane gridPane = new GridPane();
+		gridPane.setVgap(5); 
+	    gridPane.setHgap(5);       
+	      
+	    gridPane.setAlignment(Pos.CENTER); 
+	    
+		InfoLabel helpLabel= new InfoLabel("The game is played using the keys W A S D to move Frogger"
+				+ "/nSo we have a total of three Levels LAZY AVERAGE CRAZY"
+				+ "/nThe names suggest how hard the levels are"
+				+ "/nIn each of the Level, we have a speed increase");
+		helpLabel.setPrefSize(150, 20);
+		helpLabel.setTextFill(Color.web("#6e0412",0.8));
+		gridPane.add(helpLabel,2,0);
+		
+		
+		subSceneHelp.getPane().getChildren().add(gridPane);
 	}
 
 	//method used to create levelchoosersubscene 

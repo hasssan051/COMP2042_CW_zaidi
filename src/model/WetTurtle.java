@@ -5,23 +5,25 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 import model.ActorResources.ActorComponents;
 
-public class WetTurtle extends Actor{
+public class WetTurtle extends MovableActors{
 	Image turtle1;
 	Image turtle2;
 	Image turtle3;
 	Image turtle4;
 	
-	private int speed=0;
+	private double speed=0;
 	boolean sunk = false;
 	
 	ActorComponents oBject =ActorComponents.WETTURTLE;
-	ArrayList<Actor> objects;
+	ArrayList<MovableActors> objects;
 	private int spacing= 100;
 	
 	@Override
-	public void act(long now,ArrayList<Actor> objects, int speedMultiplier) {
+	public void act(long now,ArrayList<MovableActors> objects, double newSpeed) {
+		double firstXPos=0;
 		this.objects=objects;
-		double firstXPos= getFirstXPosition();
+		this.speed= newSpeed;
+		
 				if (now/900000000  % 4 ==0) {
 					setImage(turtle2);
 					sunk = false;
@@ -38,15 +40,27 @@ public class WetTurtle extends Actor{
 					sunk = true;
 				}
 			
+		if(speed>0) {
+			firstXPos= getFirstXPositionRight();
+		}
+		else {
+			firstXPos= getFirstXPositionLeft();
+		}
 		move(speed , 0);
-		if (getX() > 600 && speed>0)
+		if (getX()>600 && speed>0)
 			if(firstXPos<0) {
-				setX(firstXPos-oBject.getWidth()-spacing);
-				} else {
-					setX(-oBject.getWidth()-spacing);
-				}
-		if (getX() < -75 && speed<0)
-			setX(600);
+				setX(firstXPos-oBject.getSize()-spacing);
+			}else {
+				setX(-oBject.getSize()-spacing);
+			}
+				
+			
+		if (getX()<-300 && speed<0)
+			if(firstXPos<0) {
+				setX(600+firstXPos+oBject.getSize()+spacing);
+			}else {
+				setX(600+oBject.getSize()+spacing);
+			}
 	}
 	public WetTurtle(int xpos, int ypos, int s) {
 		turtle1 = new Image(oBject.getUrlAnimation1(), oBject.getWidth(), oBject.getHeight(), true, true);
@@ -62,14 +76,28 @@ public class WetTurtle extends Actor{
 		return sunk;
 	}
 	
-	protected double getFirstXPosition() {
+	public double getFirstXPositionRight() {
 		double firstXPos=0;
-		for(Actor actor: objects) {
+		for(MovableActors actor: objects) {
 			if(getY()==actor.getY() && (firstXPos>actor.getX())) {
 				firstXPos=actor.getX();
 			}
 		}
 		return firstXPos;
+	}
+ 
+ public double getFirstXPositionLeft() {
+		double firstXPos=0;
+		for(MovableActors actor: objects) {
+			if(getY()==actor.getY() && (firstXPos<actor.getX())) {
+				firstXPos=actor.getX();
+			}
+		}
+		return firstXPos;
+	}
+	@Override
+	public double getSpeed() {
+		return this.speed;
 	}
 	
 	

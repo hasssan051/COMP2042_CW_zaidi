@@ -21,8 +21,11 @@ public class InfoLabel extends Label{
 	
 	public final static String BACKGROUND_IMAGE_STRING= "/view/ViewResources/green_button13.png";
 	
-	private boolean isMainLabel;
 	
+	
+	public InfoLabel() {
+		
+	}
 	public InfoLabel(String text) {
 		
 		setPrefWidth(380);
@@ -43,12 +46,10 @@ public class InfoLabel extends Label{
 	}
 	
 	public InfoLabel(String text, boolean isMainLabel) {
-		/*
-		 * setPrefWidth(200); setPrefHeight(30);
-		 */
+		
 		
 			setText(text);
-		//setWrapText(true);
+			setWrapText(true);
 			setLabelFont(FONT_PATH);
 		
 		

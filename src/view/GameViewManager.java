@@ -2,8 +2,8 @@ package view;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -21,9 +21,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Actor;
-import model.Animal;
+
+import model.Frogger;
 import model.Digit;
+import model.IntersectingActors;
+import model.MovableActors;
 import model.MenuModels.InfoLabel;
 import model.MenuModels.LEVEL;
 
@@ -41,14 +43,11 @@ public class GameViewManager {
 	private Stage gameStage;
 	AnimationTimer timer;
 	private MediaPlayer mediaPlayer;
-	private Animal frogger;
-	private ArrayList<Actor> objects;
+	private Frogger frogger;
+	private ArrayList<IntersectingActors> objects;
 	private String newHighScore; //used if the user sets a new High Score 
 	private int numOfLevel;
-	/*
-	 * private String highScoreLazy; private String highScoreAverage; private String
-	 * highScoreCrazy;
-	 */
+
 	
 	private boolean speedChange;
 	ImageView speedImageView;
@@ -60,7 +59,7 @@ public class GameViewManager {
 	private static final int GAME_HEIGHT=800;
 	private static final String BACKGROUND_IMAGE="file:src/view/ViewResources/FrogBackground.png";
 	private static final String MUSIC_URL= "src/view/ViewResources/Frogger Main Song Theme (loop).mp3";
-	private static final String SPEED_IMAGE_URL= "file:src/ViewResources/resources/speedincrease.png";
+	private static final String SPEED_IMAGE_URL= "file:src/view/ViewResources/speedincrease.png";
 	
 	private Stage menuStage;
 	private String playerName;
@@ -91,6 +90,7 @@ public class GameViewManager {
 		backgroundImage.setImage( new Image(BACKGROUND_IMAGE,600,800,true,false));
 		background.add(backgroundImage);
 		}
+	
 	/**
 	 * This method is set to public and will be accessed by a class that makes a GameViewManager object. 
 	 * This method is used in order to hide passed in screen and show the present one.
@@ -142,36 +142,40 @@ public class GameViewManager {
 	 */
 	private void startGame(int numOfLogs, int numOfSlowCars,int numOfFastCars,int numOfLargeTrucks,
 			int numOfSmallTrucks, int numOfTurtles,int numOfWetTurtles, int numOfCrocodiles, boolean CrocHead) {
-			createNameDialog();
+			
 			GameSetter game = new GameSetter(numOfLogs,numOfSlowCars,numOfFastCars,numOfLargeTrucks,
 					numOfSmallTrucks,numOfTurtles,numOfWetTurtles,numOfCrocodiles,CrocHead);
-			frogger=(Animal) game.getFrogger();
+			frogger=(Frogger) game.getFrogger();
 			objects= game.getArrayList();
 			setObjectsToBackground();
 			createLabels();
 			DisplayHighScore(scoreHandler.getHighScoreForLevel(numOfLevel));
 			makeSpeedChange();
 			createTimer();
+			
 			//playMusic();
 			timer.start();
+			createNameDialog();
 	}
 	
 	private void createNameDialog() {
 		textDialog= new TextInputDialog();
 		
-		textDialog.setTitle("You beat the Highest Score, Enter your name Good Sir");
-		
+		textDialog.setTitle("Enter your name Good Sir");
+		textDialog.setGraphic(null);
+		textDialog.setHeaderText(null);
 		textDialog.getDialogPane().setContentText("Name");
 		
+		@SuppressWarnings("unused")
 		Optional<String> result =textDialog.showAndWait();
 		
 		TextField input = textDialog.getEditor();
 		
 		if(input.getText() !=null && input.getText().toString().length() != 0) {
-			System.out.println("\nWhat the fuck is this shit why is not showing anything="+input.getText().toString());
 			playerName=input.getText().toString();
 		}
 		else {
+			playerName="Nobody";
 			System.out.println("User did not enter anything");
 		}
 		
@@ -197,6 +201,7 @@ public class GameViewManager {
             @Override
             public void handle(long now) {
             	int speedMultiplier=1;
+            	double speed=1;
             	if(frogger.isGameOver()) {
             		
             		System.out.print("STOPP:");
@@ -206,36 +211,63 @@ public class GameViewManager {
             			scoreHandler.replaceLine(newHighScore,numOfLevel);
             		}
             		else {
-            		Alert alert = new Alert(AlertType.INFORMATION);
-            		alert.setTitle("You're Done Bro");
-            		alert.setHeaderText("Your Score: "+frogger.getPoints()+"!");
-            		alert.setContentText("BETTER LUCK NEXT TIME LOSER");
-            		alert.show();
+            		createAlertBox();
             		}
             	}
-            	List<Actor> actors = background.getObjects(Actor.class);
-                for (Actor anActor: actors) {
-                	anActor.act(now, objects,speedMultiplier);
+            	ArrayList<MovableActors> actors = (ArrayList<MovableActors>) background.getObjects(MovableActors.class);
+                for (MovableActors anActor: actors) {
+                	speed=anActor.getSpeed();
+                	anActor.act(now,actors,speed);
                 }
+                frogger.act(now);
             	if (frogger.changeScore()) {
             		setNumber(frogger.getPoints());
             	}           	
             	if(frogger.hasStageEnded()) {
             		System.out.println("stage has ended bro");
-            		speedMultiplier++;
+            		speedMultiplier+=1;
             		System.out.printf("The speed has increased by %d", speedMultiplier);
             		speedChange=true;
             		if(hasSpeedChanged()) {
             			System.out.println("why is speed change not showing then...");
             			showSpeedChange();
             		}
+            		for (MovableActors anActor: actors) {
+                     	speed=anActor.getSpeed()*speedMultiplier;
+                     	anActor.act(now, actors,speed);
+                     }
             		if(speedMultiplier== 3) {
             			stop();
             		}
             	}
             }
+
+			
         };
     }
+	
+	private void createAlertBox() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("You're Done Bro Let's Go Back");
+		alert.getDialogPane().setMaxWidth(400);
+		alert.setGraphic(null);
+		alert.setHeaderText(null);
+		alert.setOnHidden(evt -> endGame());
+		alert.setContentText("BETTER LUCK NEXT TIME LOSER");
+		alert.show();
+		//Optional<ButtonType> result= alert.showAndWait();
+		
+		/*
+		 * if(result.isPresent()) { endGame(); }
+		 */
+	}
+	private void endGame() {
+		mediaPlayer.stop();
+		menuStage.show();
+		gameStage.close();
+		
+	}
+
 	/**
 	 * Method checks boolean variable speed change.
 	 * @return if speedChange is true return true else return false
@@ -298,7 +330,7 @@ public class GameViewManager {
 
 
 	/**
-	 * Method shows points and any change in points on the Gui according to argument received.
+	 * Method shows points and any change in points on the GUI according to argument received.
 	 * @param n is the change of score received. 
 	 */
     public void setNumber(int n) {
@@ -311,7 +343,11 @@ public class GameViewManager {
     		  shift+=30;
     		}
     }
-	
+	/**
+	 * Displays the digits of the HighScore received on the screen.
+	 * Displays four zeroes if the HighScore received is zero otherwise displays the number.
+	 * @param highScore is the HighScore received for the particular level chosen by the user
+	 */
     private void DisplayHighScore(int highScore) {
     	System.out.println("This is the value of n"+highScore);
     	int shift = 0;	
@@ -333,6 +369,9 @@ public class GameViewManager {
     	}
     }
 	
+    /**
+     * Method creates HighScore and Points Labels that are displayed on the screen
+     */
 	private void createLabels() {
 	InfoLabel highScore = new InfoLabel("HIGH SCORE:", false);
 	highScore.setLayoutX(40);

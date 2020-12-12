@@ -2,15 +2,17 @@ package model.ActorResources;
 
 public enum ActorComponents {
 	
-	FROGGER("file:src/model/Actorresources/froggerUp.png",
-			"file:src/model/Actorresources/froggerDown.png",
-			"file:src/model/Actorresources/froggerLeft.png",
-			"file:src/model/Actorresources/froggerRight.png",40),
+	FROGGER("file:src/model/ActorResources/froggerUp.png",
+			"file:src/model/ActorResources/froggerDown.png",
+			"file:src/model/ActorResources/froggerRight.png",
+			"file:src/model/ActorResources/froggerLeft.png",
+			40),
 	
-	FROGGERMOVE("file:src/Actorresources/frog/froggerUpJump.png",
-			"file:src/model/Actorresources/froggerDownJump.png",
-			"file:src/model/Actorresources/froggerLeftJump.png",
-			"file:src/model/Actorresources/froggerRightJump.png",40),
+	FROGGERMOVE("file:src/model/ActorResources/froggerUpJump.png",
+			"file:src/model/ActorResources/froggerDownJump.png",
+			"file:src/model/ActorResources/froggerRightJump.png",
+			"file:src/model/ActorResources/froggerLeftJump.png",
+			40),
 	
 	LOG("file:src/model/Actorresources/logs.png",300),
 	LOG3("file:src/model/Actorresources/log3.png",150),
@@ -33,7 +35,7 @@ public enum ActorComponents {
 			"file:src/model/ActorResources/truck2Right.png",200,200),
 	
 	CROCODILE("file:src/model/ActorResources/crocodileleft.png",
-			"file:src/model/ActorResources/crocodile.png",120,120),
+			"file:src/model/ActorResources/crocodile.png",150,150),
 	
 	CROCHEAD("file:src/model/ActorResources/crochead.png",65),
 	

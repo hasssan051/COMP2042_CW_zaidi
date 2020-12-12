@@ -4,11 +4,13 @@ package view;
 import java.util.ArrayList;
 
 
-import model.Actor;
-import model.Animal;
+//import model.Actor;
+import model.Frogger;
 import model.CrocHead;
 import model.End;
+import model.IntersectingActors;
 import model.Log;
+import model.MainPlayer;
 import model.Obstacle;
 import model.Turtle;
 import model.WetTurtle;
@@ -21,17 +23,16 @@ import model.ActorResources.ActorComponents;
  */
 public class GameSetter {
 	
-	private ArrayList<Actor> objects= new ArrayList<Actor>();
+	private ArrayList<IntersectingActors> objects= new ArrayList<IntersectingActors>();
 
-	private Actor frogger;
+	private MainPlayer frogger;
 	
-	private static final String FROGGER_URL = "file:src/model/ActorResources/froggerUp.png";
-    private static final String CROC_HEAD_= "file:src/model/ActorResources/crochead.png";
+   
 	
 	public GameSetter(int numOfLogs, int numOfSlowCars,int numOfFastCars,int numOfLargeTrucks,
 			int numOfSmallTrucks,int numOfTurtles,int numOfWetTurtles,int numOfCrocodiles,boolean CrocHead) {
 		//objects.clear();
-		createLog(numOfLogs, (int)Math.ceil(numOfLogs/2), numOfLogs);
+		createLog(numOfLogs, numOfLogs, numOfLogs);
 		createSlowCars(numOfSlowCars);
 		createFastCars(numOfFastCars);
 		createLargeTrucks(numOfLargeTrucks);
@@ -39,7 +40,7 @@ public class GameSetter {
 		createTurtle(numOfTurtles);
 		createWetTurle(numOfWetTurtles);
 		createCrocodilesRight(numOfCrocodiles);
-		createCrocodilesLeft(numOfCrocodiles);
+		//createCrocodilesLeft(numOfCrocodiles);
 		createEnd();
 		if(CrocHead) {
 			createCrocHeads();
@@ -52,7 +53,7 @@ public class GameSetter {
 	 * This method makes a crocHead object and then adds it to the objects ArrayList
 	 */
 	private void createCrocHeads() {
-		CrocHead crocHead=new CrocHead(CROC_HEAD_,65,0,65,6);
+		CrocHead crocHead=new CrocHead(ActorComponents.CROCHEAD,65,0,65,6);
 		objects.add(crocHead);
 	}
 	
@@ -63,7 +64,7 @@ public class GameSetter {
 	private void createCrocodilesRight(int numOfCrocodiles) {
 		int xpos=0;
 		for(int i=0; i<numOfCrocodiles;i++) {
-			Obstacle croc = new Obstacle(ActorComponents.CROCODILE, xpos, 200,2);
+			Obstacle croc = new Obstacle(ActorComponents.CROCODILE, xpos, 440,2);
 			objects.add(croc);
 			xpos+=400;
 		}
@@ -73,15 +74,15 @@ public class GameSetter {
 	 * Method makes Crocodile Obstacles, moving towards the right, according to the argument passed in and adds it to the objects ArrayList
 	 * @param numOfCrocodiles specifies the number of crocodiles that need to be created
 	 */
-	private void createCrocodilesLeft(int numOfCrocodiles) {
-		int xpos=0;
-		for(int i=0; i<numOfCrocodiles;i++) {
-			Obstacle croc = new Obstacle(ActorComponents.CROCODILE, xpos, 276, -2);
-			objects.add(croc);
-			xpos+=400;
-		}
-		
-	}
+//	private void createCrocodilesLeft(int numOfCrocodiles) {
+//		int xpos=0;
+//		for(int i=0; i<numOfCrocodiles;i++) {
+//			Obstacle croc = new Obstacle(ActorComponents.CROCODILE, xpos, 276, -2);
+//			objects.add(croc);
+//			xpos+=400;
+//		}
+//		
+//	}
 	
 	/**
 	 * Create five End objects and adds it to the objects ArrayList
@@ -100,7 +101,7 @@ public class GameSetter {
 	 */
 
 	private void makeFrogger() {
-		frogger = new Animal(FROGGER_URL);
+		frogger = new Frogger();
 		objects.add(frogger);
 	}
 	/**
@@ -244,7 +245,7 @@ public class GameSetter {
 	 * @return returns the objects ArrayList 
 	 */
 	
-	public ArrayList<Actor> getArrayList(){
+	public ArrayList<IntersectingActors> getArrayList(){
 		return objects;
 	}
 	
@@ -252,7 +253,7 @@ public class GameSetter {
 	 * Returns an Actor.
 	 * @return returns Actor Animal called frogger
 	 */
-	public Actor getFrogger() {
+	public IntersectingActors getFrogger() {
 		return frogger;
 	}
 	
