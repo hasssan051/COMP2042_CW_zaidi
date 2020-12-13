@@ -18,8 +18,8 @@ public enum ActorComponents {
 	LOG3("file:src/model/Actorresources/log3.png",150),
 	
 	TURTLE("file:src/model/ActorResources/TurtleAnimation1.png",
-			"file:src/modelActorResources/TurtleAnimation2.png",
-			"file:src/modelActorResources/TurtleAnimation3.png",130,130),
+			"file:src/model/ActorResources/TurtleAnimation2.png",
+			"file:src/model/ActorResources/TurtleAnimation3.png",130,130),
 	
 	WETTURTLE("file:src/model/ActorResources/TurtleAnimation1.png",
 			"file:src/model/ActorResources/TurtleAnimation2Wet.png",

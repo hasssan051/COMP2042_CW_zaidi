@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -14,54 +15,37 @@ import model.ActorResources.ActorComponents;
 
 
 public class Frogger extends MainPlayer {
-	Image imgW1;
-	Image imgA1;
-	Image imgS1;
-	Image imgD1;
-	Image imgW2;
-	Image imgA2;
-	Image imgS2;
-	Image imgD2;
+
 	private static ActorComponents frogger=ActorComponents.FROGGER;
 	private static ActorComponents froggerMove= ActorComponents.FROGGERMOVE;
-	
-	private int points = 0; //keeps track of the points in the game 
-	
-	//the variables below are used for the movement of the frog
-	//private boolean second = false;
-	private boolean noMove = false;
-	
-	
-	private static final double movementY = 13.3333333*2; //moves in Y direction
-	private static final double movementX = 10.666666*2; //moves in X direction 
-	private static final int 	imgSize =frogger.getSize();  //is used as an argument in Image constructor to set the size of images as they are initialized 
-	
+	private static final double movementY = 13.3333333*2; 
+	private static final double movementX = 10.666666*2; 
+	private static final int 	imgSize =frogger.getSize();
 	private static final double initialPosX=300;
 	private static final double initialPosY=679.8+movementY;
-		
-	//private boolean stop = false;
+	
+	private int points = 0; 
+	private boolean noMove = false;
 	private boolean changeScore = false;
-	
 	private boolean hasStageChanged=false;
-	
 	private int Death=0;
-	
 	private double w = 800; 
+	
+	Image imgW1 = new Image(frogger.getUrlUp(), imgSize, imgSize, true, true);
+	Image imgA1 = new Image(frogger.getUrlLeft(), imgSize, imgSize, true, true);
+	Image imgS1 = new Image(frogger.getUrlDown(), imgSize, imgSize, true, true);
+	Image imgD1 = new Image(frogger.getUrlRight(), imgSize, imgSize, true, true);
+	Image imgW2 = new Image(froggerMove.getUrlUp(), imgSize, imgSize, true, true);
+	Image imgA2 = new Image(froggerMove.getUrlLeft(), imgSize, imgSize, true, true);
+	Image imgS2 = new Image(froggerMove.getUrlDown(), imgSize, imgSize, true, true);
+	Image imgD2 = new Image(froggerMove.getUrlRight(), imgSize, imgSize, true, true);
 	
 	ArrayList<End> inter = new ArrayList<>();
 	ArrayList<End> activatedEnds =new ArrayList<End>();
+	//private boolean stop = false;
+	
 	
 	public Frogger() {
-		 
-		imgW1 = new Image(frogger.getUrlUp(), imgSize, imgSize, true, true);
-		imgA1 = new Image(frogger.getUrlLeft(), imgSize, imgSize, true, true);
-		imgS1 = new Image(frogger.getUrlDown(), imgSize, imgSize, true, true);
-		imgD1 = new Image(frogger.getUrlRight(), imgSize, imgSize, true, true);
-		imgW2 = new Image(froggerMove.getUrlUp(), imgSize, imgSize, true, true);
-		imgA2 = new Image(froggerMove.getUrlLeft(), imgSize, imgSize, true, true);
-		imgS2 = new Image(froggerMove.getUrlDown(), imgSize, imgSize, true, true);
-		imgD2 = new Image(froggerMove.getUrlRight(), imgSize, imgSize, true, true);
-		
 		setFroggerToStart();
 		createKeyListner();
 	}
@@ -136,10 +120,11 @@ public class Frogger extends MainPlayer {
 		
 	}
 
-	@Override
+	
 	public void act(long now) {		
 		
 		froggerInBound();
+		
 		System.out.println(Death);
 		if (getX() == 240 && getY() == 82) {
 			
@@ -190,7 +175,10 @@ public class Frogger extends MainPlayer {
 			deathAnimator(ActorComponents.WATERDEATH);	
 		}
 	}
-	
+	/**
+	 * Calls the stageEnded method to check if the stage has ended. hasStageChange field will be changed by the stageEnded method.
+	 * @return returns true if hasStageChanged is true else it returns false
+	 */
 	public boolean hasStageEnded() {
 		stageEnded();
 		if(hasStageChanged) {
@@ -222,6 +210,10 @@ public class Frogger extends MainPlayer {
 		}		
 	}
 	
+	/**
+	 * This method checks how many times frogger has died for the GameSetter class and, returns true if the number of deaths exceeds a certain value.
+	 * @return returns whether the integer Death has increased more than a specified value
+	 */
 	public boolean isGameOver() {
 		return Death>33;
 	}
@@ -241,9 +233,9 @@ public class Frogger extends MainPlayer {
                 new KeyFrame(Duration.seconds(0.4), new KeyValue(this.imageProperty(),anim2)),
                 new KeyFrame(Duration.seconds(0.6), new KeyValue(this.imageProperty(),anim3)),
                 new KeyFrame(Duration.seconds(0.7), new KeyValue(this.imageProperty(),anim4)),
-                new KeyFrame(Duration.seconds(0.2), e -> setFroggerToStart()),   
-                new KeyFrame(Duration.seconds(0.9), new KeyValue(this.imageProperty(), new Image(ActorComponents.FROGGER.getUrlUp(), imgSize, imgSize, true, true)))
-
+                new KeyFrame(Duration.seconds(0.2), e -> setFroggerToStart()), 
+                new KeyFrame(Duration.seconds(0.9), new KeyValue(this.imageProperty(), new Image(ActorComponents.FROGGER.getUrlUp(), imgSize, imgSize, true, true))),
+                new KeyFrame(Duration.ZERO,e->Death++)
                 );
         timeLine.play();
         timeLine.setOnFinished(new EventHandler<ActionEvent>() {
@@ -251,14 +243,14 @@ public class Frogger extends MainPlayer {
 			@Override
 			public void handle(ActionEvent arg0) {
 				noMove=false;
-				Death++;
+				
 			}
 		});		
        
 	}
 	
 	/**
-	 * This method keeps frogger in bounds of the screen  
+	 * This method keeps frogger in bounds of the screen.
 	 */
 	private void froggerInBound() {
 		if (getY()<0 || getY()>734) {
@@ -273,7 +265,7 @@ public class Frogger extends MainPlayer {
 		
 	}
 	/**
-	 * Method to allow classes to receive score from the frogger class
+	 * Method to allow classes to receive score from the frogger class.
 	 * @return returns point according to the point in time 
 	 */
 
@@ -281,7 +273,7 @@ public class Frogger extends MainPlayer {
 		return points;
 	}
 	/**
-	 * Method to check whether score has changed
+	 * Method to check whether score has changed.
 	 * @return returns true if changeScore variable is true else returns false
 	 */
 	
@@ -294,17 +286,12 @@ public class Frogger extends MainPlayer {
 		
 	}
 	/**
-	 * Sets frogger to its initial position with it facing upwards 
+	 * Sets frogger to its initial position with it facing upwards.
 	 */
 	private void setFroggerToStart() {
 		setX(initialPosX);
 		setY(initialPosY);
 		setImage(imgW1);
 	}
-	/*
-	 * public Image getFroggerUp() { return imgW1; }
-	 */
-
 	
-
 }

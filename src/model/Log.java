@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 import model.ActorResources.ActorComponents;
 /**
- * Extends MovableActors class, and an object of this class is a single Log. This class implements the act method and is able to move each method according 
- * to the inputs received. The objects created are also positioned with proper spacing. 
+ * Extends MovableActors class, and an object of this class is a single Log. Frogger or any PlayerActor object can hitch a ride on a Log.
+ * This class implements the act method and is able to move each method according to the inputs received. The objects created are also 
+ * positioned with proper spacing. 
  * @author HP
  *
  */
@@ -24,6 +25,7 @@ public class Log extends MovableActors{
 		this.objects= objects;
 		this.speed=newSpeed;
 		double firstXPos=0;
+		
 		if(speed>0) {
 			firstXPos= getFirstXPositionRight();
 		}
@@ -48,7 +50,14 @@ public class Log extends MovableActors{
 			//setX(700);
 	}
 	
-	
+	/**
+	 * The constructor receives an ActorComponents Object from the gamesetter which it uses in order to create the object according to its specifications 
+	 * in ActorComponents Enum. 
+	 * @param object ActorComponents object, which specifies exactly which sort of log is needed to be made
+	 * @param xpos initial position of the object on the x axis.
+	 * @param ypos position of the object on y axis (the row in which the object will fit into). 
+	 * @param s initial speed with which the object will move on the screen.
+	 */
 
 	public Log(ActorComponents object, int xpos, int ypos, double s) {
 		this.oBject = object;

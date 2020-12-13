@@ -3,15 +3,14 @@ package view;
 
 import java.util.ArrayList;
 
-
-//import model.Actor;
-import model.Frogger;
+import model.ActorsEnum;
 import model.CrocHead;
 import model.End;
 import model.IntersectingActors;
 import model.Log;
 import model.MainPlayer;
 import model.Obstacle;
+import model.PlayerFactory;
 import model.Turtle;
 import model.WetTurtle;
 import model.ActorResources.ActorComponents;
@@ -101,7 +100,7 @@ public class GameSetter {
 	 */
 
 	private void makeFrogger() {
-		frogger = new Frogger();
+		frogger = PlayerFactory.createPlayer(ActorsEnum.FROGGER);
 		objects.add(frogger);
 	}
 	/**

@@ -21,9 +21,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import model.Frogger;
 import model.Digit;
+import model.Frogger;
 import model.IntersectingActors;
 import model.MovableActors;
 import model.MenuModels.InfoLabel;
@@ -78,7 +77,7 @@ public class GameViewManager {
 		gameScene = new Scene(background, GAME_WIDTH, GAME_HEIGHT);
 		gameStage = new Stage();
 		gameStage.setScene(gameScene);
-		//gameStage.setResizable(false);
+		gameStage.setResizable(false);
 	}
 	
 	/**
@@ -130,16 +129,27 @@ public class GameViewManager {
 		}
 		
 	}
-	/**
-	 * Method is used to create Game according to whatever the chosen level is. 
-	 * This method creates Gamesetter object according all the arguments that it receives.
-	 * @param numOfLogs number of logs that should be present in the game 
-	 * @param numOfCars number of cars that should be in the game 
-	 * @param numOfTrucks number of trucks in the game
-	 * @param numOfTurtles number of turtles in the game
-	 * @param numOfCrocodiles number of Crocodiles in the game
-	 * @param CrocHead specifies whether there is going to be a CrocHead in the game or not
-	 */
+/**
+ * Method is used to create Game according to whatever the chosen level is. This method creates Gamesetter object according all the arguments that it receives.
+ * @param numOfLogs number of logs that should be present in the game
+ * @param numOfSlowCars number of slow cars that should be in the game 
+ * @param numOfFastCars number of fast cars that should be in the game
+ * @param numOfLargeTrucks number of Large trucks that should be in the game
+ * @param numOfSmallTrucks number of small trucks in the game
+ * @param numOfTurtles number of Turtles that should be in the game
+ * @param numOfWetTurtles number of WetTurtles that should be present in the game
+ * @param numOfCrocodiles number of Crocodiles in the game
+ * @param CrocHead specifies whether there is going to be a CrocHead in the game or not
+ */
+	
+//	 Method is used to create Game according to whatever the chosen level is. 
+//	 * This method creates Gamesetter object according all the arguments that it receives.
+//	 * @param numOfLogs number of logs that should be present in the game 
+//	 * @param numOfCars number of cars that should be in the game 
+//	 * @param numOfTrucks number of trucks in the game
+//	 * @param numOfTurtles number of turtles in the game
+//	 * @param numOfCrocodiles number of Crocodiles in the game
+//	 * @param CrocHead specifies whether there is going to be a CrocHead in the game or not
 	private void startGame(int numOfLogs, int numOfSlowCars,int numOfFastCars,int numOfLargeTrucks,
 			int numOfSmallTrucks, int numOfTurtles,int numOfWetTurtles, int numOfCrocodiles, boolean CrocHead) {
 			
@@ -157,7 +167,9 @@ public class GameViewManager {
 			timer.start();
 			createNameDialog();
 	}
-	
+	/**
+	 * This method creates and Displays a TextInputDialog for the user to enter their name.
+	 */
 	private void createNameDialog() {
 		textDialog= new TextInputDialog();
 		
@@ -246,6 +258,9 @@ public class GameViewManager {
         };
     }
 	
+	/**
+	 * This method creates an AlertBox which is displayed after the Game ends. It calls for the endGame method.
+	 */
 	private void createAlertBox() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("You're Done Bro Let's Go Back");
@@ -261,8 +276,11 @@ public class GameViewManager {
 		 * if(result.isPresent()) { endGame(); }
 		 */
 	}
+	/**
+	 * This method closes the gameStage and shows the menuStage again.
+	 */
 	private void endGame() {
-		mediaPlayer.stop();
+		//mediaPlayer.stop();
 		menuStage.show();
 		gameStage.close();
 		
@@ -331,7 +349,7 @@ public class GameViewManager {
 
 	/**
 	 * Method shows points and any change in points on the GUI according to argument received.
-	 * @param n is the change of score received. 
+	 * @param n is the score of the player at the current moment in time.
 	 */
     public void setNumber(int n) {
     	int shift = 0;

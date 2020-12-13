@@ -2,10 +2,12 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,7 +26,6 @@ import model.MenuModels.FroggerSubScene;
 import model.MenuModels.InfoLabel;
 import model.MenuModels.LEVEL;
 import model.MenuModels.LevelPicker;
-import javafx.scene.effect.DropShadow;
 
 public class ViewManager {
 	

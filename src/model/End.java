@@ -12,8 +12,6 @@ import javafx.scene.image.Image;
 public class End extends IntersectingActors{
 	private boolean activated = false;
 	
-	
-	
 	private static final String END_URL="file:src/model/ActorResources/End.png";
 	private static final String SET_END_URL="file:src/model/ActorResources/FrogEnd.png";
 	
