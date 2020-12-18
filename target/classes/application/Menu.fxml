@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.Controller">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:src/view/ViewResources/background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="600.0" fitWidth="800.0" layoutX="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:src/view/ViewResources/background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="40.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../view/ViewResources/Frog.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="350.0" fitWidth="450.0" layoutX="290.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../view/ViewResources/frogger-logo-2.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="40.0" layoutY="220.0" mnemonicParsing="false" onAction="#scoreButtonPressed" stylesheets="@style.css" text="Score" />
+      <Button layoutX="40.0" layoutY="320.0" mnemonicParsing="false" onAction="#playButtonPressed" stylesheets="@style.css" text="Play" />
+      <Button layoutX="40.0" layoutY="520.0" mnemonicParsing="false" onAction="#exitButtonPressed" stylesheets="@style.css" text="Exit" />
+      <Button layoutX="40.0" layoutY="420.0" mnemonicParsing="false" onAction="#helpButtonPressed" stylesheets="@style.css" text="Help" />
+      <Pane fx:id="helpPane" layoutX="800.0" layoutY="210.0" prefHeight="350.0" prefWidth="500.0">
+         <children>
+            <ImageView fitHeight="350.0" fitWidth="500.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../view/ViewResources/green_panel.png" />
+               </image>
+            </ImageView>
+            <TextArea editable="false" layoutX="34.0" layoutY="80.0" prefHeight="243.0" prefWidth="433.0" styleClass="text-area" stylesheets="@style.css" text="The Frogger game has a total of three levels, each containing three inner stages, making a total of nine level/stages.&#10;&#10;The three levels include Lazy, Average and Crazy.&#10;&#10;Each level has an additional level of difficulty, this is in form of crocodiles included in the Average level and the CrocHead in the Crazy Level.&#10;&#10;The user completes each stage by filling in the five ends in the screen.&#10;&#10;After the five ends have been filled, the speed increases and the user has to refill all the ends.&#10;&#10;The player Frogger can be moved using the WASD keys.&#10;&#10;Frogger can be killed, if it comes in contact with an Obstacle, Crocodile or falls into the water.&#10;&#10;Frogger can use Logs and Turtles to progress forward when it is in the river.&#10;&#10;WaterTurtles are also dangerous, since they can sink under water thus drowning frogger, if it is on their backs.&#10;&#10;Users can set a highest score in each of the Levels.&#10; &#10; " wrapText="true">
+               <font>
+                  <Font name="MT Extra" size="12.0" />
+               </font>
+            </TextArea>
+            <Label alignment="CENTER" layoutX="45.0" layoutY="25.0" styleClass="headingLabel" stylesheets="@style.css" text="Help" />
+         </children>
+      </Pane>
+      <Pane fx:id="scorePane" layoutX="800.0" layoutY="210.0" prefHeight="350.0" prefWidth="500.0">
+         <children>
+            <ImageView fitHeight="350.0" fitWidth="500.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../view/ViewResources/green_panel.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="52.0" layoutY="25.0" styleClass="headingLabel" stylesheets="@style.css" text="HIGHEST SCORES" />
+            <VBox layoutX="37.0" layoutY="100.0" prefHeight="200.0" prefWidth="436.0" spacing="50.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label styleClass="headingLabel" stylesheets="@style.css" text="CRAZY" wrapText="true" />
+                        <Label fx:id="crazyNameLabel" styleClass="smallLabel" stylesheets="@style.css" />
+                        <Label fx:id="crazyScoreLabel" styleClass="smallLabel" stylesheets="@style.css" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label styleClass="headingLabel" stylesheets="@style.css" text="AVERAGE" />
+                        <Label fx:id="averageNameLabel" styleClass="smallLabel" stylesheets="@style.css" />
+                        <Label fx:id="averageScoreLabel" styleClass="smallLabel" stylesheets="@style.css" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label styleClass="headingLabel" stylesheets="@style.css" text="LAZY" />
+                        <Label fx:id="lazyNameLabel" styleClass="smallLabel" stylesheets="@style.css" />
+                        <Label fx:id="lazyScoreLabel" styleClass="smallLabel" stylesheets="@style.css" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="levelChooserPane" layoutX="800.0" layoutY="210.0" prefHeight="350.0" prefWidth="500.0">
+         <children>
+            <ImageView fitHeight="350.0" fitWidth="500.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../view/ViewResources/green_panel.png" />
+               </image>
+            </ImageView>
+            <HBox layoutX="39.0" layoutY="100.0" prefHeight="169.0" prefWidth="433.0" spacing="40.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="75.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../view/ViewResources/levelchooser/lazy.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="circle1" fitHeight="36.0" fitWidth="36.0" onMouseClicked="#circle1Clicked" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="49.0" prefWidth="190.0" styleClass="smallLabel" stylesheets="@style.css" text="LAZY" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="75.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../view/ViewResources/levelchooser/average.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="circle2" fitHeight="36.0" fitWidth="36.0" onMouseClicked="#circle2Clicked" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="168.0" styleClass="smallLabel" stylesheets="@style.css" text="AVERAGE" wrapText="true" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="75.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../view/ViewResources/levelchooser/crazy.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="circle3" fitHeight="36.0" fitWidth="36.0" onMouseClicked="#circle3Clicked" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="49.0" prefWidth="190.0" styleClass="smallLabel" stylesheets="@style.css" text="CRAZY" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" layoutX="50.0" layoutY="25.0" styleClass="headingLabel" stylesheets="@style.css" text="CHOOSE LEVEL" />
+            <Button layoutX="270.0" layoutY="285.0" mnemonicParsing="false" onAction="#startButtonPressed" stylesheets="@style.css" text="START" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

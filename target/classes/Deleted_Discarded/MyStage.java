@@ -1,0 +1,24 @@
+package Deleted_Discarded;
+
+import java.io.File;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+public class MyStage  {
+	MediaPlayer mediaPlayer;
+	
+	
+	public void playMusic() {
+		String musicFile = "src/p4_group_8_repo/Frogger Main Song Theme (loop).mp3";   
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+	    mediaPlayer.play();
+	}
+	
+	public void stopMusic() {
+		mediaPlayer.stop();
+	}
+
+}

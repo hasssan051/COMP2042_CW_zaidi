@@ -1,0 +1,84 @@
+
+
+@font-face {
+    src: url("/model/MenuResources/kenvector_future.ttf"),
+}
+
+.root {
+    -fx-background-color: black;
+    -fx-font-family: "KenVector Future";
+}
+
+
+.button:pressed {
+	-fx-background-color: transparent; 
+	-fx-background-image: url(/model/MenuResources/green_button05.png);
+	-fx-pref-width:190;
+	-fx-pref-height:45;
+	-fx-translate-y:4;
+	-fx-font-family: "KenVector Future";
+	-fx-font-size:23;
+	-fx-effect: dropshadow(three-pass-box, purple, 10, 0, 0, 0);
+}
+
+
+.button {
+	-fx-background-color: transparent; 
+	-fx-background-image: url(/model/MenuResources/green_button04.png);
+	-fx-pref-width:190;
+	-fx-pref-height:49;
+	-fx-font-family: "KenVector Future";
+	-fx-font-size:23;
+	-fx-effect: dropshadow(three-pass-box, purple, 10, 0, 0, 0);
+}
+
+.button:hover{
+	-fx-background-color: transparent; 
+	-fx-background-image: url(/model/MenuResources/green_button04.png);
+	-fx-pref-width:190;
+	-fx-pref-height:49;
+	-fx-font-family: "KenVector Future";
+	-fx-font-size:25;
+	-fx-effect: dropshadow(three-pass-box, #f0f8ff, 10, 0, 0, 0);
+}
+
+.smallLabel {
+	-fx-font-size:20;
+	-fx-pref-width:380;
+	-fx-pref-height:49;
+	-fx-font-family: "KenVector Future";
+		
+}
+
+.headingLabel{
+	-fx-font-size:26;
+	-fx-pref-width:450;
+	-fx-text-fill:#6e0412;
+	-fx-pref-height:49;
+	-fx-font-family: "KenVector Future";
+}
+
+
+.text-area {
+	-fx-background-color:transparent;
+	-fx-background:transparent;
+	-fx-font-family: "MT Extra";
+	-fx-font-size:15;
+	-fx-text-fill:#800000;
+	
+}
+
+.text-area .scroll-pane {
+	-fx-background-color:transparent;
+}
+
+.text-area .scroll-pane .viewport {
+	-fx-background-color:transparent;
+}
+
+.text-area .scroll-pane .content {
+	-fx-background-color:transparent;
+}
+
+
+

@@ -17,6 +17,20 @@
      
 	</dependency>
 	
+	<!-- https://mvnrepository.com/artifact/org.testfx/testfx-junit -->
+	<dependency>
+	    <groupId>org.testfx</groupId>
+	    <artifactId>testfx-junit</artifactId>
+	    <version>4.0.15-alpha</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.testfx</groupId>
+	    <artifactId>testfx-core</artifactId>
+	    <version>4.0.15-alpha</version>
+	</dependency>
+	
+	
 <!-- 	<dependency> -->
 <!-- 	     <groupId>org.junit.platform</groupId> -->
 <!-- 	     <artifactId>junit-platform-runner</artifactId> -->
@@ -81,9 +95,18 @@
     <resource>
     <directory>src</directory>
     <excludes>
-    <exclude>**/*.java</exclude>
+<!--     <exclude>**/*.java</exclude> -->
     </excludes>
     </resource>
+    
+    
+    
+<!--     <resource> -->
+<!--         <directory>src/application</directory> -->
+<!--         <includes> -->
+<!--           <include>**/*.fxml</include> -->
+<!--         </includes> -->
+<!--       </resource> -->
     </resources>
         
     
