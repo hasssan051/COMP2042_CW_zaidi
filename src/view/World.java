@@ -9,7 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import model.IntersectingActors;
+import model.actorRefactored.IntersectingActors;
 
 /**
  * This class is the Pane in which all the objects of the game will reside. The class is used to build the scene of the game. 

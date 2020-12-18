@@ -56,6 +56,11 @@ class ScoreHandlerTest {
 		assertTrue(scoreHandler.isNewHighScore(60, 2,testingData),"New high score is not being identified");
 		
 	}
+	
+	@Test
+	void testReplaceLineMethod() {
+		
+	}
 //	@Test
 //	void testIOException() {
 //		assertThrows(IOException.class, 

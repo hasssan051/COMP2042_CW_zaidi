@@ -82,10 +82,11 @@ public class ScoreHandler {
 	}
 	
 	/**
-	 * This method is used to replace a high score from the file. It basically just removes a specific line(line with particular level's high score )
+	 *  This method is used to replace a high score from the file. It basically just removes a specific line(line with particular level's high score )
 	 *  with a new one
 	 * @param replaceWithHighScore the new high score that the user has scored with their name
 	 * @param levelofHighScore Level in which the user has scored the high score
+	 * @param fileUrl
 	 */
 	public void replaceLine(String replaceWithHighScore, int levelofHighScore, String fileUrl) {
 		  List<String> listOfLines =Collections.emptyList();
@@ -106,9 +107,9 @@ public class ScoreHandler {
 	
 	/**
 	 * Reads whatever is inside the file into a List
+	 * @param fileUrl
 	 * @return returns the list containing whatever was in the file
 	 */
-	
 	public static List<String> readFileIntoList(String fileUrl){
 		List<String> lines= Collections.emptyList();
 		try {

@@ -21,8 +21,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.MenuModels.FroggerButton;
-import model.MenuModels.FroggerSubScene;
 import view.ScoreHandler;
 
 public class ViewManager {

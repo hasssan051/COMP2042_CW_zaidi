@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="model.End" project="COMP2042_CW_HassanZaidi" 
-    file="/COMP2042_CW_HassanZaidi/src/model/End.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="model.actors.End" project="COMP2042_CW_HassanZaidi" 
+    file="/COMP2042_CW_HassanZaidi/src/model/actors/End.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="367" y="639"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="model.Frogger" project="COMP2042_CW_HassanZaidi" 
-    file="/COMP2042_CW_HassanZaidi/src/model/Frogger.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="model.actors.Frogger" project="COMP2042_CW_HassanZaidi" 
+    file="/COMP2042_CW_HassanZaidi/src/model/actors/Frogger.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="389" y="209"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="model.WetTurtle" project="COMP2042_CW_HassanZaidi" 
-    file="/COMP2042_CW_HassanZaidi/src/model/WetTurtle.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="model.actors.WetTurtle" project="COMP2042_CW_HassanZaidi" 
+    file="/COMP2042_CW_HassanZaidi/src/model/actors/WetTurtle.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="591" y="-249"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="model.Obstacle" project="COMP2042_CW_HassanZaidi" 
-    file="/COMP2042_CW_HassanZaidi/src/model/Obstacle.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="model.actors.Obstacle" project="COMP2042_CW_HassanZaidi" 
+    file="/COMP2042_CW_HassanZaidi/src/model/actors/Obstacle.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="748" y="662"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="model.Turtle" project="COMP2042_CW_HassanZaidi" 
-    file="/COMP2042_CW_HassanZaidi/src/model/Turtle.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="model.actors.Turtle" project="COMP2042_CW_HassanZaidi" 
+    file="/COMP2042_CW_HassanZaidi/src/model/actors/Turtle.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="765" y="-262"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -82,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="model.Log" project="COMP2042_CW_HassanZaidi" 
-    file="/COMP2042_CW_HassanZaidi/src/model/Log.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="model.actors.Log" project="COMP2042_CW_HassanZaidi" 
+    file="/COMP2042_CW_HassanZaidi/src/model/actors/Log.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="682" y="492"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

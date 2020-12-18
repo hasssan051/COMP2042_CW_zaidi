@@ -3,17 +3,17 @@ package view;
 
 import java.util.ArrayList;
 
-import model.ActorsEnum;
-import model.CrocHead;
-import model.End;
-import model.IntersectingActors;
-import model.Log;
-import model.MainPlayer;
-import model.Obstacle;
-import model.PlayerFactory;
-import model.Turtle;
-import model.WetTurtle;
 import model.ActorResources.ActorComponents;
+import model.actorRefactored.PlayerEnum;
+import model.actorRefactored.IntersectingActors;
+import model.actorRefactored.MainPlayer;
+import model.actorRefactored.PlayerFactory;
+import model.actors.CrocHead;
+import model.actors.End;
+import model.actors.Log;
+import model.actors.Obstacle;
+import model.actors.Turtle;
+import model.actors.WetTurtle;
 
 /**
  * This class is used to make each of the object that the GameViewManager Class will later render
@@ -52,7 +52,7 @@ public class GameSetter {
 	 * This method makes a crocHead object and then adds it to the objects ArrayList
 	 */
 	private void createCrocHeads() {
-		CrocHead crocHead=new CrocHead(ActorComponents.CROCHEAD,65,0,65,6);
+		CrocHead crocHead=new CrocHead(ActorComponents.CROCHEAD,65,0,90,6);
 		objects.add(crocHead);
 	}
 	
@@ -69,19 +69,6 @@ public class GameSetter {
 		}
 		
 	}
-	/**
-	 * Method makes Crocodile Obstacles, moving towards the right, according to the argument passed in and adds it to the objects ArrayList
-	 * @param numOfCrocodiles specifies the number of crocodiles that need to be created
-	 */
-//	private void createCrocodilesLeft(int numOfCrocodiles) {
-//		int xpos=0;
-//		for(int i=0; i<numOfCrocodiles;i++) {
-//			Obstacle croc = new Obstacle(ActorComponents.CROCODILE, xpos, 276, -2);
-//			objects.add(croc);
-//			xpos+=400;
-//		}
-//		
-//	}
 	
 	/**
 	 * Create five End objects and adds it to the objects ArrayList
@@ -100,7 +87,7 @@ public class GameSetter {
 	 */
 
 	private void makeFrogger() {
-		frogger = PlayerFactory.createPlayer(ActorsEnum.FROGGER);
+		frogger = PlayerFactory.createPlayer(PlayerEnum.FROGGER);
 		objects.add(frogger);
 	}
 	/**
@@ -193,7 +180,7 @@ public class GameSetter {
 	private void createSlowCars(int carNum) {
 		int xpos=100;
 		for (int i=0; i< carNum; i++) {
-			Obstacle slowCars = new Obstacle(ActorComponents.CAR, xpos, 597, -1);
+			Obstacle slowCars = new Obstacle(ActorComponents.CAR2, xpos, 597, -1);
 			objects.add(slowCars);
 			xpos +=150;
 			}

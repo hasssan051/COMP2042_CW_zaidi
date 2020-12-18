@@ -28,6 +28,8 @@ public enum ActorComponents {
 	
 	CAR("file:src/model/ActorResources/car1Left.png",
 			"file:src/model/ActorResources/car1Right.png",50,50),
+	CAR2("file:src/model/ActorResources/car1Right.png",
+			"file:src/model/ActorResources/car1Left.png",50,50),
 	
 	TRUCK1("file:src/model/ActorResources/truck1Left.png",
 			"file:src/model/ActorResources/truck1Right.png",120,120),
