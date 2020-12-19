@@ -1,6 +1,8 @@
 # COMP2042_CW_zaidi
 The extension of Code, to enhance maintainibility and adhere to refactoring practices.
 
+*** Testing is done through JUnit and TestFx ***
+
 ## Running the Program
 - 1 Import the project into chosen IDE.
 - 2 Run maven clean then maven build.
